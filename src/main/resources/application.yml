@@ -3,4 +3,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/auth_db?serverTimezone=Asia/Seoul
     username: auth_appuser
-    password: thswhdgus1!
+    password: qwe123!@#
+
+jwt:
+  secret-key: 7J206rKD7J2A7Iqk7ZSE66eB7Iuc7YGQ66as7Yuw7JmASldU66W87Zmc7Jqp7ZWc7J247Kad7Ja07ZSM66as7LyA7J207IWY7J2E6rCc67Cc7ZWg65WM7IKs7Jqp7ZWY64qU67mE67CA7YKk7J6F64uI64ukLg== # encoded Base64 from text
+  validity-in:
+    access: 3600000 # an hour
+    refresh: 86400000 # a day
