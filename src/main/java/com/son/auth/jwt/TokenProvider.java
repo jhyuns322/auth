@@ -29,9 +29,9 @@ public class TokenProvider implements InitializingBean {
     @Value("${jwt.secret-key}")
     private String secretKey;
     @Value("${jwt.validity-in.access}")
-    private long accessTokenValidityInMilliseconds;
+    private long ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS;
     @Value("${jwt.validity-in.refresh}")
-    private long refreshTokenValidityInMilliseconds;
+    private long REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS;
     private Key key;
     private final String AUTHORITIES_KEY = "auth";
     private final String AUTHORIZATION_HEADER = "Authorization";
@@ -45,7 +45,7 @@ public class TokenProvider implements InitializingBean {
 
     public String createAccessToken(String userId) {
         long now = new Date().getTime();
-        Date validity = new Date(now + this.accessTokenValidityInMilliseconds);
+        Date validity = new Date(now + this.ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS);
         return Jwts.builder()
                 .claim(AUTHORITIES_KEY, 1)
                 .claim(USER_KEY, userId)
@@ -57,7 +57,7 @@ public class TokenProvider implements InitializingBean {
 
     public String createRefreshToken() {
         long now = new Date().getTime();
-        Date validity = new Date(now + this.accessTokenValidityInMilliseconds);
+        Date validity = new Date(now + this.REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS);
         return Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)

@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class UserController {
 
     private final UserService userService;
+
     @PostMapping("/")
     public ResponseEntity<?> addUser(@RequestBody UserDto req) {
         log.info("addUser() req: {}", req.toString());
@@ -27,9 +28,30 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> testApi() {
-        log.info("testApi works!");
+    public ResponseEntity<?> getUser(@RequestParam String userId) {
+        log.info("getUser() userId: {}", userId);
 
+        UserDto userDto = userService.findUser(userId);
+
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> getUsers() {
+        log.info("getUsers()");
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping("/")
+    public ResponseEntity<?> modifyUser() {
+        log.info("modifyUser()");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> removeUser() {
+        log.info("removeUser()");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

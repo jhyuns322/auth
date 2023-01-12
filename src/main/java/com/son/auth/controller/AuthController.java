@@ -32,9 +32,4 @@ public class AuthController {
         return new ResponseEntity<>(results, HttpStatus.OK);
     }
 
-    @GetMapping("/test/")
-    public ResponseEntity<?> test2() {
-        log.info("test2");
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }

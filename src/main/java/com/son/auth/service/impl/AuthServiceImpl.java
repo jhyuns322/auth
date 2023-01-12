@@ -22,9 +22,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String authenticateUser(UserDto req) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUserId(), req.getUserPw()));
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        return principalDetails.getUsername();
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUserId(), req.getUserPw()));
+            PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+            return principalDetails.getUsername();
+        } catch (BadCredentialsException e) {
+            throw new BadCredentialsException(e.getLocalizedMessage());
+        }
     }
 
     @Override
