@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 @RequiredArgsConstructor
 public class AdminController {
 
     @GetMapping("/")
     public ResponseEntity<?> test() {
         log.info("test()");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Good!" ,HttpStatus.OK);
     }
 }
