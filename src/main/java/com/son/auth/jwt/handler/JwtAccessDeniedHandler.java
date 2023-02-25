@@ -1,4 +1,4 @@
-package com.son.auth.jwt;
+package com.son.auth.jwt.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;

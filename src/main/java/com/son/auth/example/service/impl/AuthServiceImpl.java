@@ -1,11 +1,10 @@
-package com.son.auth.service.impl;
+package com.son.auth.example.service.impl;
 
-import com.son.auth.domain.User;
-import com.son.auth.dto.UserDto;
-import com.son.auth.jwt.Token;
-import com.son.auth.jwt.TokenProvider;
+import com.son.auth.example.dto.AuthDto;
+import com.son.auth.example.service.AuthService;
+import com.son.auth.jwt.dto.Token;
+import com.son.auth.jwt.util.TokenProvider;
 import com.son.auth.security.PrincipalDetails;
-import com.son.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
@@ -21,7 +20,7 @@ public class AuthServiceImpl implements AuthService {
     private final TokenProvider tokenProvider;
 
     @Override
-    public String authenticateUser(UserDto req) {
+    public String authenticateUser(AuthDto req) {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUserId(), req.getUserPw()));
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();

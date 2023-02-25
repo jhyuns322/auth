@@ -1,8 +1,8 @@
 package com.son.auth.security.config;
 
-import com.son.auth.jwt.JwtAccessDeniedHandler;
-import com.son.auth.jwt.JwtAuthenticationEntryPoint;
-import com.son.auth.jwt.TokenProvider;
+import com.son.auth.jwt.handler.JwtAccessDeniedHandler;
+import com.son.auth.jwt.handler.JwtAuthenticationEntryPoint;
+import com.son.auth.jwt.util.TokenProvider;
 import com.son.auth.jwt.config.JwtConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/admin/**").hasAuthority("0")
                 .anyRequest().authenticated()
 
                 .and()

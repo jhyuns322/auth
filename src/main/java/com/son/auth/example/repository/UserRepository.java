@@ -1,6 +1,6 @@
-package com.son.auth.repository;
+package com.son.auth.example.repository;
 
-import com.son.auth.domain.User;
+import com.son.auth.example.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,11 @@
-package com.son.auth.jwt;
+package com.son.auth.jwt.dto;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Token {
     private String accessToken;
     private String refreshToken;

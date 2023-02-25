@@ -1,8 +1,8 @@
-package com.son.auth.controller;
+package com.son.auth.example.controller;
 
-import com.son.auth.dto.UserDto;
-import com.son.auth.jwt.Token;
-import com.son.auth.service.AuthService;
+import com.son.auth.example.dto.AuthDto;
+import com.son.auth.jwt.dto.Token;
+import com.son.auth.example.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,14 +13,14 @@ import java.util.HashMap;
 
 @RestController
 @Slf4j
-@RequestMapping("/auth")
+@RequestMapping("/auths")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
 
     @PostMapping("/")
-    public ResponseEntity<?> authenticate(@RequestBody UserDto req) {
+    public ResponseEntity<?> authenticate(@RequestBody AuthDto req) {
         log.info("authenticate() req: {}", req.toString());
 
         String userId = authService.authenticateUser(req);

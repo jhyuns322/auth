@@ -1,6 +1,6 @@
 package com.son.auth.jwt.filter;
 
-import com.son.auth.jwt.TokenProvider;
+import com.son.auth.jwt.util.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

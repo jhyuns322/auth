@@ -1,12 +1,14 @@
-package com.son.auth.jwt;
+package com.son.auth.jwt.util;
 
-import com.son.auth.domain.User;
+import com.son.auth.example.domain.User;
+import com.son.auth.example.repository.UserRepository;
 import com.son.auth.security.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +26,7 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class TokenProvider implements InitializingBean {
 
     @Value("${jwt.secret-key}")
@@ -77,21 +80,24 @@ public class TokenProvider implements InitializingBean {
         return true;
     }
 
-    public Authentication getAuthentication(String jwt) {
-        Claims claims = Jwts.parserBuilder()
+    public Claims parseClaims(String jwt) {
+        return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
+    }
 
-        Collection<? extends GrantedAuthority> authorities =
-                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
+    private final UserRepository userRepository;
 
-        String userId = (String) claims.get(USER_KEY);
+    public Authentication getAuthentication(String jwt) {
+        Claims claims = parseClaims(jwt);
 
-        User user = User.builder().userId(userId).build();
+        User user = userRepository.findByUserId((String) claims.get(USER_KEY));
+
+        Collection<? extends GrantedAuthority> authorities = Arrays.stream(user.getUserRole().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
 
         return new UsernamePasswordAuthenticationToken(new PrincipalDetails(user), jwt, authorities);
     }

@@ -1,7 +1,7 @@
 package com.son.auth.security.service;
 
-import com.son.auth.domain.User;
-import com.son.auth.repository.UserRepository;
+import com.son.auth.example.domain.User;
+import com.son.auth.example.repository.UserRepository;
 import com.son.auth.security.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.son.auth.domain;
+package com.son.auth.example.domain;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -20,9 +20,14 @@ public class User {
     @Column(name = "user_pw")
     private String userPw;
 
+    @Column(name = "user_role")
+    private String userRole;
+
+
     @Builder
-    User(String userId, String userPw) {
+    User(String userId, String userPw, String userRole) {
         this.userId = userId;
         this.userPw = userPw;
+        this.userRole = userRole;
     }
 }

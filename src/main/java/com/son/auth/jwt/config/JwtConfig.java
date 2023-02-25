@@ -1,6 +1,6 @@
 package com.son.auth.jwt.config;
 
-import com.son.auth.jwt.TokenProvider;
+import com.son.auth.jwt.util.TokenProvider;
 import com.son.auth.jwt.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
